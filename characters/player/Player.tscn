@@ -1,15 +1,56 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://characters/player/body.png" type="Texture" id=3]
 
-[node name="Player" index="0" instance=ExtResource( 1 )]
+[sub_resource type="Animation" id=1]
+
+resource_name = "idle"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.405563 ),
+"update": 0,
+"values": [ Vector2( 0.0201464, -58.9771 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.382544 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[node name="Player" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 
+[node name="AnimationPlayer" parent="." index="0"]
+
+anims/idle = SubResource( 1 )
+
 [node name="Body" parent="Pivot" index="0"]
 
+position = Vector2( 0.0201464, -58.9771 )
 texture = ExtResource( 3 )
+
+[node name="Shadow" parent="." index="4"]
+
+position = Vector2( -0.117651, -1.05212 )
+scale = Vector2( 1, 1 )
 
 
